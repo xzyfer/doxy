@@ -41,4 +41,14 @@ This is a non-standard multiple
 indentation
 */
 
-// This is a less/sass style comment
+// This is a single line less/sass style comment
+
+// This is a multiple
+//  line css
+//   style comment
+//
+//    with line
+//
+//   breaks
+//  and
+// indentation

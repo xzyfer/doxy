@@ -1,0 +1,29 @@
+{
+  "name": "doxy",
+  "version": "0.0.0",
+  "description": "Generic comment parser/serializer for css, and js",
+  "main": "lib/doxy.js",
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/xzyfer/doxy.git"
+  },
+  "author": "xzyfer",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "f4fe6d8881abb124da5731d229e77b66266ad0f5",
+  "devDependencies": {
+    "grunt-jsvalidate": "~0.2.1",
+    "grunt-contrib-jshint": "~0.6.1",
+    "grunt-contrib-watch": "~0.5.1",
+    "grunt-cafe-mocha": "~0.1.8",
+    "grunt-cli": "~0.1.9",
+    "grunt": "~0.4.1",
+    "matchdep": "~0.1.2",
+    "should": "~1.2.2",
+    "grunt-release": "~0.4.0"
+  },
+  "dependencies": {}
+}

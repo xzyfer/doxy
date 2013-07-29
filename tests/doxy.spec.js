@@ -22,23 +22,35 @@ describe('doxy', function() {
             fixture('styles.js', function(err, file) {
                 var comments = doxy.parse(file);
 
-                comments.length.should.equal(7);
+                comments.length.should.equal(9);
             });
         });
 
-        it('should treat sequential less/sass style comments as a single blocks', function() {
+        it('should be able to parse a multiple line css comment with content on the opening line', function() {
             fixture('styles.js', function(err, file) {
                 var comments = doxy.parse(file)
-                  , lines = toLines(comments[6]);
+                  , lines = toLines(comments[1]);
 
-                lines.length.should.equal(9);
+                lines.length.should.equal(1);
+                lines[0].should.equal('This is a multiple line css comment with content on the opening line');
+            });
+        });
+
+        it('should be able to parse a multiple line css comment with content on the opening and closing lines', function() {
+            fixture('styles.js', function(err, file) {
+                var comments = doxy.parse(file)
+                  , lines = toLines(comments[2]);
+
+                lines.length.should.equal(2);
+                lines[0].should.equal('This is a multiple line css comment with content on the opening line');
+                lines[1].should.equal('   and closing lines with equal indentation');
             });
         });
 
         it('should respect indention of comment blocks', function() {
             fixture('styles.js', function(err, file) {
                 var comments = doxy.parse(file)
-                  , lines = toLines(comments[3]);
+                  , lines = toLines(comments[5]);
 
                 lines[0].should.match(/^\s{0}/);
                 lines[1].should.match(/^\s{1}/);
@@ -53,7 +65,7 @@ describe('doxy', function() {
         it('should respect indention of non-standard comment blocks', function() {
             fixture('styles.js', function(err, file) {
                 var comments = doxy.parse(file)
-                  , lines = toLines(comments[4]);
+                  , lines = toLines(comments[6]);
 
                 lines[0].should.match(/^\s{0}/);
                 lines[1].should.match(/^\s{1}/);
@@ -65,10 +77,19 @@ describe('doxy', function() {
             });
         });
 
+        it('should treat sequential less/sass style comments as a single blocks', function() {
+            fixture('styles.js', function(err, file) {
+                var comments = doxy.parse(file)
+                  , lines = toLines(comments[8]);
+
+                lines.length.should.equal(9);
+            });
+        });
+
         it('should respect indention of less/sass style comment blocks', function() {
             fixture('styles.js', function(err, file) {
                 var comments = doxy.parse(file)
-                  , lines = toLines(comments[6]);
+                  , lines = toLines(comments[8]);
 
                 lines[0].should.match(/^\s{0}/);
                 lines[1].should.match(/^\s{1}/);

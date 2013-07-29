@@ -22,11 +22,21 @@ describe('doxy', function() {
             fixture('styles.js', function(err, file) {
                 var comments = doxy.parse(file);
 
-                comments.length.should.equal(9);
+                comments.length.should.equal(8);
             });
         });
 
-        it('should be able to parse a multiple line css comment with content on the opening line', function() {
+        it('should be able to parse a single line css comment', function() {
+            fixture('styles.js', function(err, file) {
+                var comments = doxy.parse(file)
+                  , lines = toLines(comments[0]);
+
+                lines.length.should.equal(1);
+                lines[0].should.equal('This is a single line css style comment');
+            });
+        });
+
+        it('should be able to parse a multiple line css comment block with content on the opening line', function() {
             fixture('styles.js', function(err, file) {
                 var comments = doxy.parse(file)
                   , lines = toLines(comments[1]);
@@ -36,68 +46,88 @@ describe('doxy', function() {
             });
         });
 
-        it('should be able to parse a multiple line css comment with content on the opening and closing lines', function() {
+        it('should be able to parse a multiple line css comment block with content on the opening and closing lines', function() {
             fixture('styles.js', function(err, file) {
                 var comments = doxy.parse(file)
                   , lines = toLines(comments[2]);
 
                 lines.length.should.equal(2);
                 lines[0].should.equal('This is a multiple line css comment with content on the opening line');
-                lines[1].should.equal('   and closing lines with equal indentation');
+                lines[1].should.equal('and closing lines with equal indentation');
             });
         });
 
-        it('should respect indention of comment blocks', function() {
+        it('should be able to parse a css comment block', function() {
+            fixture('styles.js', function(err, file) {
+                var comments = doxy.parse(file)
+                  , lines = toLines(comments[3]);
+
+                  lines.length.should.equal(9);
+                  lines[0].should.equal('This is a multiple');
+                  lines[1].should.equal(' line css');
+                  lines[2].should.equal('  style comment');
+                  lines[4].should.equal('   with line');
+                  lines[6].should.equal('  breaks');
+                  lines[7].should.equal(' and');
+                  lines[8].should.equal('indentation');
+            });
+        });
+
+        it('should be able to parse a non-standard comment block', function() {
+            fixture('styles.js', function(err, file) {
+                var comments = doxy.parse(file)
+                  , lines = toLines(comments[4]);
+
+              lines.length.should.equal(9);
+              lines[0].should.equal('This is a non-standard multiple');
+              lines[1].should.equal(' line css');
+              lines[2].should.equal('  style comment');
+              lines[4].should.equal('   with line');
+              lines[6].should.equal('  breaks');
+              lines[7].should.equal(' and');
+              lines[8].should.equal('indentation');
+            });
+        });
+
+        it('should be able to compensate for leading indentation ', function() {
             fixture('styles.js', function(err, file) {
                 var comments = doxy.parse(file)
                   , lines = toLines(comments[5]);
 
-                lines[0].should.match(/^\s{0}/);
-                lines[1].should.match(/^\s{1}/);
-                lines[2].should.match(/^\s{2}/);
-                lines[4].should.match(/^\s{3}/);
-                lines[6].should.match(/^\s{2}/);
-                lines[7].should.match(/^\s{1}/);
-                lines[8].should.match(/^\s{0}/);
+              lines.length.should.equal(9);
+              lines[0].should.equal('This is a non-standard multiple');
+              lines[1].should.equal(' line css');
+              lines[2].should.equal('  style comment');
+              lines[4].should.equal('   with line');
+              lines[6].should.equal('  breaks');
+              lines[7].should.equal(' and');
+              lines[8].should.equal('indentation');
             });
         });
 
-        it('should respect indention of non-standard comment blocks', function() {
+        it('should be able to parse a single line less/sass style comment', function() {
             fixture('styles.js', function(err, file) {
                 var comments = doxy.parse(file)
                   , lines = toLines(comments[6]);
 
-                lines[0].should.match(/^\s{0}/);
-                lines[1].should.match(/^\s{1}/);
-                lines[2].should.match(/^\s{2}/);
-                lines[4].should.match(/^\s{3}/);
-                lines[6].should.match(/^\s{2}/);
-                lines[7].should.match(/^\s{1}/);
-                lines[8].should.match(/^\s{0}/);
+                lines.length.should.equal(1);
+                lines[0].should.equal('This is a single line less/sass style comment');
             });
         });
 
-        it('should treat sequential less/sass style comments as a single blocks', function() {
+        it('should be able to parse a less/sass style comment block', function() {
             fixture('styles.js', function(err, file) {
                 var comments = doxy.parse(file)
-                  , lines = toLines(comments[8]);
+                  , lines = toLines(comments[7]);
 
                 lines.length.should.equal(9);
-            });
-        });
-
-        it('should respect indention of less/sass style comment blocks', function() {
-            fixture('styles.js', function(err, file) {
-                var comments = doxy.parse(file)
-                  , lines = toLines(comments[8]);
-
-                lines[0].should.match(/^\s{0}/);
-                lines[1].should.match(/^\s{1}/);
-                lines[2].should.match(/^\s{2}/);
-                lines[4].should.match(/^\s{3}/);
-                lines[6].should.match(/^\s{2}/);
-                lines[7].should.match(/^\s{1}/);
-                lines[8].should.match(/^\s{0}/);
+                lines[0].should.equal('This is a multiple');
+                lines[1].should.equal(' line less/sass');
+                lines[2].should.equal('  style comment');
+                lines[4].should.equal('   with line');
+                lines[6].should.equal('  breaks');
+                lines[7].should.equal(' and');
+                lines[8].should.equal('indentation');
             });
         });
 

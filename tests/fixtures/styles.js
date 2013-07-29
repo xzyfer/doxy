@@ -29,4 +29,16 @@
  * indentation
  */
 
+/*
+This is a non-standard multiple
+ line css
+  style comment
+
+   with line
+
+  breaks
+ and
+indentation
+*/
+
 // This is a less/sass style comment

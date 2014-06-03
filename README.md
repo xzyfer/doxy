@@ -34,7 +34,7 @@ Returns a promise that resolves to the result of `doxy.parse(fileContents)`.
 With [npm](https://npmjs.org) do:
 
 ```
-npm install findit
+npm install doxy
 ```
 
 # license

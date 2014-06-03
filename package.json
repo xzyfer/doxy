@@ -2,7 +2,10 @@
   "name": "doxy",
   "version": "0.0.5",
   "description": "Generic comment parser/serializer for css, and js",
-  "main": "lib/doxy.js",
+  "main": "index.js",
+  "bin": {
+    "doxy": "bin/cmd.js"
+  },
   "scripts": {
     "test": "grunt"
   },

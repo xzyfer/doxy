@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var doxy = require('../lib/doxy'),
+var doxy = require('../'),
     should = require('should'),
     fs = require('fs');
 

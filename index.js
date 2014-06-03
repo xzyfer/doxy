@@ -2,7 +2,7 @@
 /*!
  * Module dependencies.
  */
-// var css = require('css-parse');
+var fs = require('q-io/fs');
 
 /**
  * Parse comments in the given string.
@@ -14,7 +14,9 @@
  * @api public
  */
 
-exports.parse = function(str) {
+ module.exports = doxy = {};
+
+ doxy.parse = function(str) {
     var lines = str.split(/\n/)
       , comments = []
       , comment = []
@@ -94,3 +96,11 @@ exports.parse = function(str) {
     return comments;
 };
 
+doxy.fromFile = function(file) {
+    return fs.read(file)
+        .then(function(content) {
+            return doxy.parse(content);
+        }, function(err) {
+            throw err;
+        });
+};

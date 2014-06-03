@@ -2,6 +2,8 @@
 
 A basic comment extractor.
 
+[![build status](https://secure.travis-ci.org/xzyfer/doxy.png)](http://travis-ci.org/xzyfer/doxy)
+
 # example
 
 ```

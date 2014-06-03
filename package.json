@@ -18,15 +18,15 @@
   "readmeFilename": "README.md",
   "gitHead": "f4fe6d8881abb124da5731d229e77b66266ad0f5",
   "devDependencies": {
-    "grunt-jsvalidate": "~0.2.1",
-    "grunt-contrib-jshint": "~0.6.1",
-    "grunt-contrib-watch": "~0.5.1",
+    "grunt": "~0.4.1",
     "grunt-cafe-mocha": "~0.1.8",
     "grunt-cli": "~0.1.9",
-    "grunt": "~0.4.1",
-    "matchdep": "~0.1.2",
-    "should": "~1.2.2",
-    "grunt-release": "~0.4.0"
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-jsvalidate": "~0.2.1",
+    "grunt-release": "~0.7.0",
+    "matchdep": "~0.3.0",
+    "should": "~4"
   },
   "dependencies": {
     "q-io": "~1.11.1",

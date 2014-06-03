@@ -25,5 +25,8 @@
     "should": "~1.2.2",
     "grunt-release": "~0.4.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "q-io": "^1.11.1",
+    "yargs": "~1.2.2"
+  }
 }

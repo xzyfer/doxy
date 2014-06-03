@@ -3,10 +3,10 @@ module.exports = function(grunt) {
     "use strict";
 
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        files: '@(lib|tests)/{,*/}*.js',
         watch: {
             dev: {
-                files: ['@(lib|tests)/{,*/}*.js'],
+                files: ['<%= files %>'],
                 tasks: ['default'],
                 options: {
                     debounceDelay: 250
@@ -29,15 +29,15 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            all: ['@(lib|tests)/{,*/}*.js']
+            all: ['<%= files %>']
           , options: {
                 jshintrc: '.jshintrc'
            }
         },
         jsvalidate: {
-            all: ['@(lib|tests)/{,*/}*.js']
+            all: ['<%= files %>']
         },
-        mocha: {
+        test: {
             src: 'tests/*.spec.js',
             options: {
                 ui: 'tdd',
@@ -47,8 +47,8 @@ module.exports = function(grunt) {
     });
 
     require('matchdep').filterAll('grunt-!(cli)').forEach(grunt.loadNpmTasks);
-    grunt.renameTask('cafemocha', 'mocha');
+    grunt.renameTask('cafemocha', 'test');
 
     grunt.registerTask('dev', ['watch:dev']);
-    grunt.registerTask('default', ['jsvalidate', 'jshint', 'mocha']);
+    grunt.registerTask('default', ['jsvalidate', 'jshint', 'test']);
 };

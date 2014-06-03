@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var doxy = require('../'),
+var doxy = require('../lib/doxy'),
     should = require('should'),
     fs = require('fs');
 
@@ -129,6 +129,31 @@ describe('doxy', function() {
                 lines[7].should.equal(' and');
                 lines[8].should.equal('indentation');
             });
+        });
+
+    });
+
+    describe('fromFile', function() {
+        var oldParse;
+
+        beforeEach(function() {
+            oldParse = doxy.parse;
+        });
+
+        afterEach(function() {
+            doxy.parse = oldParse;
+            oldParse = null;
+        });
+
+        it('should call doxy.parse with the file contents', function(done) {
+            doxy.parse = function(contents) {
+                fixture('styles.js', function(err, file) {
+                    contents.should.equal(file);
+                    done();
+                });
+            };
+
+            doxy.fromFile(__dirname + '/fixtures/styles.js');
         });
 
     });

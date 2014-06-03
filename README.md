@@ -1,6 +1,10 @@
 # doxy
 
-A basic comment extractor.
+Extracts single line `//` and multiline `/* */` comments from a string or file.
+Has some added smarts for normalising indentation and aesthetic prefixing.
+
+See the [test fixture](https://github.com/xzyfer/doxy/blob/new/tests/fixtures/styles.js)
+for the currently supported comment styles.
 
 [![build status](https://secure.travis-ci.org/xzyfer/doxy.png)](http://travis-ci.org/xzyfer/doxy)
 

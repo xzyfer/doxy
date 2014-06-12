@@ -5,18 +5,16 @@
 var fs = require('q-io/fs');
 
 /**
- * Parse comments in the given string.
+ * Parse comments out of in the given string.
  *
  * @param {String} str
- * @param {Object} options
  * @return {Array}
- * @see exports.parseComment
  * @api public
  */
 
- module.exports = doxy = {};
+module.exports = doxy = {};
 
- doxy.parse = function(str) {
+doxy.parse = function(str) {
     var lines = str.split(/\n/)
       , comments = []
       , comment = []
@@ -95,6 +93,14 @@ var fs = require('q-io/fs');
 
     return comments;
 };
+
+/**
+ * Parse comments out of in the given file.
+ *
+ * @param {String} path to file
+ * @return {Promise}
+ * @api public
+ */
 
 doxy.fromFile = function(file) {
     return fs.read(file)
